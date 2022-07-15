@@ -1,0 +1,18 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+    id            Int     @id @default(autoincrement())
+    name        String
+    path        String
+    
+    successor   Category? @relation("CategoryHistory")
+    predecessorId   Int? @unique
+    predecessor     Category?   @relation("CategoryHistory", fields: [predecessorId], references: [id])    
+}
