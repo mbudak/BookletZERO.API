@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import express from 'express'
+import express from 'express';
+
 const swaggerAutogen = require('swagger-autogen')();
 
 
@@ -17,6 +18,7 @@ const swaggerDocument = require('../swagger-output.json');
 var swaggerOptions = {
   explorer: true
 }
+
 
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
