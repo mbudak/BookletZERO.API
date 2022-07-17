@@ -7,12 +7,68 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Category {
-    id            Int     @id @default(autoincrement())
-    name        String
-    path        String
-    
-    successor   Category? @relation("CategoryHistory")
-    predecessorId   Int? @unique
-    predecessor     Category?   @relation("CategoryHistory", fields: [predecessorId], references: [id])    
+enum QuestionType {
+  MULTIPLECHOICE
+  TRUEFALSE
+  SHORTANSWER
+  NUMERICAL
+  ESSAY
 }
+
+model Category {
+  id              Int     @id @default(autoincrement())
+  name            String
+  path            String
+  
+  successor       Category?   @relation("CategoryHistory")
+  predecessorId   Int?        @unique
+  predecessor     Category?   @relation("CategoryHistory", fields: [predecessorId], references: [id])    
+
+  question        Question?   @relation("question_category")
+}
+
+
+model Question {
+  id                String    @id @default(uuid())  @map("_id") @db.Uuid
+  categoryId        Int       @unique
+  category          Category  @relation("question_category", fields: [categoryId], references: [id])
+
+  body              String
+  details           String
+
+  questionType      QuestionType @default(MULTIPLECHOICE)
+
+  versionNumber     Int
+
+  isObsolote        Boolean
+  
+  createdAt         DateTime  @default(now())
+  createdUserId     String
+
+  updatedAt         DateTime?
+  updatedUserId     String?
+
+  hintLink          String?
+
+}
+
+model Exam {
+  id                String    @id @default(uuid())
+  name              String
+
+
+  createdAt         DateTime
+  createdBy         String
+
+  updatedAt         DateTime?
+  updatedBy         String?
+
+  duration          Int // in Minutes
+  passScore         Int
+}
+
+model ExamQuestion {
+  id                String    @id @default(uuid())
+
+}
+

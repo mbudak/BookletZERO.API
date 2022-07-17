@@ -9,3 +9,9 @@ npx prisma migrate dev --name init
 ```
 npx prisma db seed
 ```
+
+
+### Generage API Docs ###
+```
+npx run swagger-autogen
+```

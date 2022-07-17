@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BookletZERO API",
-    "description": "Description",
+    "description": "BookletZERO API is generates pdf booklets from a large selection of question db",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -12,6 +12,17 @@
   ],
   "paths": {
     "/categories": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/questions": {
       "get": {
         "description": "",
         "parameters": [],

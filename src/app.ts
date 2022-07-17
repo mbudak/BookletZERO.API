@@ -15,7 +15,7 @@ const path  = require('path');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger-output.json');
 
-var swaggerOptions = {
+let swaggerOptions = {
   explorer: true
 }
 
@@ -23,8 +23,7 @@ var swaggerOptions = {
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
-
-//  
+//
 
 
 app.use(express.json());
@@ -33,12 +32,19 @@ app.use(express.json());
 // Static Files
 app.use(express.static(path.join(__dirname,'public')));
 
-// Routes
+// Route imports
 import home from "../routes/home";
-// import categories from "../routes/category";
 
+// Routes
 app.use("/", home);
-// app.use("/categories", categories);
+
+import bookletCodeGenerator  from '../utils/bookletCode';
+
+app.get('/code', (req, res) => {
+  var test = bookletCodeGenerator('###-###-###');
+  res.send(`Code is : ${test}`);
+})
+
 
 app.post("/categories", async (req, res) => {
 
@@ -56,6 +62,17 @@ app.get("/categories", async (req, res) => {
   }
 })
 
+app.get("/questions", async (req, res) => {
+  try {
+    const questions = await prisma.question.findMany()
+
+    res.json(questions)
+  } catch (error: any) {
+    res.status(500).json({
+      message: `error: ${error.message}` ,
+    })
+  }
+})
 
 
 
