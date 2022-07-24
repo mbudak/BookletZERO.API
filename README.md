@@ -13,5 +13,5 @@ npx prisma db seed
 
 ### Generage API Docs ###
 ```
-npx run swagger-autogen
+npx run swagger
 ```

@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/categories": {
+    "/": {
       "get": {
         "description": "",
         "parameters": [],
@@ -22,7 +22,29 @@
         }
       }
     },
-    "/questions": {
+    "/category/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/category/about": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/category/hello": {
       "get": {
         "description": "",
         "parameters": [],

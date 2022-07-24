@@ -25,6 +25,12 @@ model Category {
   predecessor     Category?   @relation("CategoryHistory", fields: [predecessorId], references: [id])    
 
   question        Question?   @relation("question_category")
+
+  Accepted        Int         @default(0)
+  Waiting         Int         @default(0)
+  Obsolote        Int         @default(0)
+
+  SuccessRate     Decimal     @default(0.0)
 }
 
 
@@ -38,18 +44,23 @@ model Question {
 
   questionType      QuestionType @default(MULTIPLECHOICE)
 
-  versionNumber     Int
+  versionNumber     Int         @default(0)
 
-  isObsolote        Boolean
+  isObsolote        Boolean     @default(false)
   
-  createdAt         DateTime  @default(now())
-  createdUserId     String
+  createdAt         DateTime    @default(now())
+  createdUserId     String      @default("system")
 
   updatedAt         DateTime?
   updatedUserId     String?
 
   hintLink          String?
 
+}
+
+model QuestionExplanations{
+  id                String    @id @default(uuid())  @map("_id") @db.Uuid
+  details           String
 }
 
 model Exam {
@@ -72,3 +83,16 @@ model ExamQuestion {
 
 }
 
+model ExamTemplate  {
+  id                String    @id @default(uuid())
+  questionCategory  String
+  total             Int       @default(0)
+  isActive          Boolean   @default(true)  
+}
+
+model ExamRule {
+  id                String    @id @default(uuid())
+  name              String
+  details           String
+
+}
