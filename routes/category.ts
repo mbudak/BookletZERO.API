@@ -12,9 +12,9 @@ router.use((req, res, next) => {
 })
 
 // define the home page route
-router.get('/', async (req, res) => {
+router.get('/',  (req, res) => {
     try{
-        const categories = await prisma.category.findMany();
+        const categories =  prisma.category.findMany();
         res.json(categories);
     } catch(e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {

@@ -4,9 +4,11 @@ CREATE TYPE "QuestionType" AS ENUM ('MULTIPLECHOICE', 'TRUEFALSE', 'SHORTANSWER'
 -- CreateTable
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
+    "cid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "path" TEXT NOT NULL,
-    "predecessorId" INTEGER,
+    "color" TEXT NOT NULL DEFAULT '#000',
+    "parentId" INTEGER,
     "Accepted" INTEGER NOT NULL DEFAULT 0,
     "Waiting" INTEGER NOT NULL DEFAULT 0,
     "Obsolote" INTEGER NOT NULL DEFAULT 0,
@@ -82,13 +84,10 @@ CREATE TABLE "ExamRule" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category_predecessorId_key" ON "Category"("predecessorId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Question_categoryId_key" ON "Question"("categoryId");
 
 -- AddForeignKey
-ALTER TABLE "Category" ADD CONSTRAINT "Category_predecessorId_fkey" FOREIGN KEY ("predecessorId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Category" ADD CONSTRAINT "Category_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Question" ADD CONSTRAINT "Question_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

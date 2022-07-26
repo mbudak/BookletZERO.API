@@ -17,12 +17,20 @@ enum QuestionType {
 
 model Category {
   id              Int     @id @default(autoincrement())
+  cid             String      @default(cuid())
   name            String
   path            String
   
-  successor       Category?   @relation("CategoryHistory")
-  predecessorId   Int?        @unique
-  predecessor     Category?   @relation("CategoryHistory", fields: [predecessorId], references: [id])    
+  color           String      @default("#000")
+
+  // successor       Category?   @relation("CategoryHistory")
+  // predecessorId   Int?        @unique
+  // predecessor     Category?   @relation("CategoryHistory", fields: [predecessorId], references: [id])    
+
+  children  Category[]   @relation("CategoryToCategory")
+  parent    Category?    @relation("CategoryToCategory", fields: [parentId], references: [id])
+  parentId  Int?
+
 
   question        Question?   @relation("question_category")
 

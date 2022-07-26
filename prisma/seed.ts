@@ -6,13 +6,40 @@ const categoryData: Prisma.CategoryCreateInput[] = [
     {
         name: "English",
         path: "English",
-        
+    },
+    {
+        name: "Aviation",
+        path: "Aviation",        
     },
     {
         name: "ATPL",
-        path: "ATPL",
-        predecessor: { connect: { id: 1 }}
-    }
+        path: "Aviation || ATPL",
+        parent: { connect: { id: 2 }}
+        // predecessor: { connect: { id: 2 }}
+    },
+    {
+        name: "PPL",
+        path: "Aviation || PPL",
+        parent: { connect: { id: 2 }}
+        // predecessor: { connect: { id: 2 }}
+    },    
+    {
+        name: "ENG LEVEL 5",
+        path: "English || ENG LEVEL 5",
+        parent: { connect: { id: 2 }}
+        // predecessor: { connect: { id: 2 }}
+    },
+    {
+        name: "ENG LEVEL 5.1",
+        path: "English || ENG LEVEL 5 || DEEP ",
+        parent: { connect: { id: 5 }}
+        // predecessor: { connect: { id: 2 }}
+    },
+
+
+
+
+
 ];
 
 const questionData: Prisma.QuestionCreateInput[] = [
@@ -47,6 +74,7 @@ async function main() {
     }
     console.log('Seeding finished');
 }
+
 
 main()
     .then(async () => {

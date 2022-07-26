@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../../partials/header'); %>
+</header>
+
+<main>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
+      <% breadcrumbs.forEach(function(bc) { %>
+        <li class="breadcrumb-item"><a href="/dashboard/category/<%= bc.cid %>"><%= bc.name %></a></li>  
+      <% }); %>
+      
+    </ol>
+  </nav>
+  
+
+<div class="row">
+  
+    
+    <% categories.forEach(function(category) { %>
+      
+      <div class=" col-md-4 col-lg-3">
+      <div class="card m-2">
+        <a  href="/dashboard/category/<%= category.cid %>">
+          <div class="card-body">
+            <%= category.name %>
+            
+          </div>
+        </a>
+      </div>
+      </div>
+      
+    
+  
+    <% }); %>
+  </div>
+
+  
+
+
+</main>
+
+<footer>
+  <%- include('../../partials/footer'); %>
+</footer>
+
+</body>
+</html>
