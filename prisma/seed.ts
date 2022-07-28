@@ -9,7 +9,7 @@ const categoryData: Prisma.CategoryCreateInput[] = [
     },
     {
         name: "Aviation",
-        path: "Aviation",        
+        path: "Aviation",
     },
     {
         name: "ATPL",
@@ -22,7 +22,7 @@ const categoryData: Prisma.CategoryCreateInput[] = [
         path: "Aviation || PPL",
         parent: { connect: { id: 2 }}
         // predecessor: { connect: { id: 2 }}
-    },    
+    },
     {
         name: "ENG LEVEL 5",
         path: "English || ENG LEVEL 5",
@@ -65,7 +65,7 @@ async function main() {
         });
         console.log(`Category created with id: ${category.id}`);
     }
-    
+
     for (const q of questionData) {
         const question = await prisma.question.create({
             data: q,

@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
 
-let swaggerOptions = {
+const swaggerOptions = {
   explorer: true
 }
 

@@ -21,7 +21,7 @@ router.get('/',  (req, res) => {
             res.json(e.code);
         }
     }
-    
+
 })
 
 // define the about route

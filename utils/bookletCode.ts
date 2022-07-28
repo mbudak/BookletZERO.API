@@ -1,8 +1,8 @@
 import { randomInt } from "crypto";
 
-// We don't want to use similiar chars like 1-I-l, 0-O, 
-var charset = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
-var codelength = charset.length;
+// We don't want to use similiar chars like 1-I-l, 0-O,
+let charset = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+let codelength = charset.length;
 
 function randomElem(arr: any) {
     return arr[randomInt(0, arr.length - 1)]
@@ -13,9 +13,9 @@ function sequenceElem(charIndex:number) {
 };
 
 function bookletCodeGenerator(pattern: String) {
-    var generateIndex = 0;
-    
-    var code = pattern.split('').map(function(char) {
+    let generateIndex = 0;
+
+    let code = pattern.split('').map(function(char) {
         if (char === '#') {
             return randomElem(charset);
         } else {
